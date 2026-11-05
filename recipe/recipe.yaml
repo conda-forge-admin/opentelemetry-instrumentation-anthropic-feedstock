@@ -33,13 +33,14 @@ requirements:
     - anthropic >=0.36.0
 
 tests:
-  - python:
-      imports:
-        - opentelemetry.instrumentation.anthropic
-      pip_check: true
-      python_version:
-        - ${{ python_min }}.*
-        - "*"
+  - requirements:
+      run:
+        - python ${{ python_min }}.*
+        - pip
+        - anthropic
+    script:
+      - python -c "import opentelemetry.instrumentation.anthropic"
+      - python -m pip check
 
 about:
   summary: OpenTelemetry Anthropic instrumentation
